@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selamat Ulang Tahun!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff4f8b;--yellow:#ffd23f;--teal:#2ec4b6;--violet:#7b5cff;--orange:#ff8a3d;--ink:#2a1245}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:#ff9ec4;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.fr{font-family:"Fredoka","Trebuchet MS",sans-serif;line-height:1.1;margin:0}
+#wall{position:fixed;inset:0;z-index:-2;background:#ff9ec4 center/cover no-repeat;filter:saturate(1.4) blur(3px);transform:scale(1.06)}
+#wall::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,79,139,.62),rgba(123,92,255,.55) 50%,rgba(46,196,182,.55))}
+#gate{position:fixed;inset:0;z-index:50;display:flex;overflow:auto;background:linear-gradient(160deg,var(--pink),var(--violet) 55%,var(--teal));color:#fff;text-align:center;padding:24px;transition:opacity .6s,visibility .6s}
+#gate>div{margin:auto;display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:420px}
+#gate.off{opacity:0;visibility:hidden}
+#gate h2{font-size:2rem}#gate p{margin:0;max-width:28ch}
+.gift{font-size:100px;border:0;background:none;cursor:pointer;animation:wob 1.6s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg) scale(1.08)}}
+button:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+/* kuis */
+#quiz{background:#fff;color:var(--ink);border-radius:30px;padding:22px;box-shadow:0 10px 0 var(--yellow)}
+#quiz.shake{animation:shk .45s}
+@keyframes shk{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+#qn{color:var(--violet);font-size:1rem;font-weight:500}
+#qt{font-size:1.4rem}
+#qo{display:grid;gap:10px;width:100%}
+.opt{border:0;border-radius:16px;padding:12px 14px;font:500 1.05rem "DM Sans",sans-serif;color:var(--ink);background:#f1eaff;cursor:pointer}
+.opt:hover{background:#e3d8ff}
+.opt.ok{background:var(--teal);color:#fff}
+.opt.bad{background:var(--pink);color:#fff}
+#qm{min-height:1.6em;font-weight:500;margin:0}
+main{max-width:760px;margin:0 auto;padding:0 20px 80px;position:relative}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative;color:#fff;text-shadow:0 3px 14px rgba(42,18,69,.55)}
+.hero h1{font-size:clamp(2.8rem,13vw,5.4rem);font-weight:700;position:relative;z-index:1}
+.hero h1 span{display:block;color:var(--yellow)}
+.hero p{font-size:1.2rem;max-width:30ch;margin:0;position:relative;z-index:1}
+section{margin-top:70px;position:relative}
+.tag{display:inline-block;font-size:1.5rem;padding:8px 20px;border-radius:999px;color:#fff;transform:rotate(-2deg);margin-bottom:16px;position:relative;z-index:1;box-shadow:0 4px 0 rgba(42,18,69,.3)}
+.t1{background:var(--violet)}.t2{background:var(--orange)}.t3{background:var(--teal)}.t4{background:var(--pink)}
+.card{background:#fff;border-radius:30px;padding:26px;font-size:1.08rem;box-shadow:0 10px 0 var(--yellow);position:relative;z-index:1}
+.card p{margin:0 0 12px}.card p:last-child{margin:0;font-weight:500}
+.fl{position:absolute;z-index:0;background:#fff;padding:6px 6px 22px;border-radius:5px;box-shadow:0 6px 16px rgba(42,18,69,.4);pointer-events:none}
+.fl img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.strip{margin:70px -20px 0;overflow:hidden;background:rgba(255,255,255,.28);padding:14px 0;position:relative;z-index:1}
+.track{display:flex;gap:14px;width:max-content;animation:run 40s linear infinite}
+.track img{height:150px;border:5px solid #fff;border-radius:10px;box-shadow:0 4px 12px rgba(42,18,69,.35);cursor:pointer}
+@keyframes run{to{transform:translateX(-50%)}}
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 16px;position:relative;z-index:1;margin-top:6px;padding:8px 4px}
+@media (min-width:600px){.board{grid-template-columns:repeat(3,1fr)}}
+.pol{position:relative;width:100%;background:#fff;padding:8px 8px 26px;border-radius:5px;box-shadow:0 6px 18px rgba(42,18,69,.4);cursor:pointer;transition:transform .25s;border:0}
+.pol img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.pol:hover{transform:scale(1.08) rotate(0)!important;z-index:5}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}
+.g{aspect-ratio:1;border:0;border-radius:24px;font-size:2.8rem;cursor:pointer;display:grid;place-items:center;padding:8px;color:var(--ink);box-shadow:0 6px 0 rgba(42,18,69,.25)}
+.g:nth-child(1){background:var(--yellow)}.g:nth-child(2){background:var(--teal)}.g:nth-child(3){background:var(--orange)}
+.g.open{font-size:.9rem;font-family:"Fredoka",sans-serif;font-weight:500;line-height:1.3}
+.cakebox{text-align:center}
+.cakebox .card{display:flex;flex-direction:column;align-items:center}
+#cake{border:0;background:none;cursor:pointer;width:min(250px,70%)}
+#flame{transition:opacity .3s,transform .3s;transform-origin:50% 100%;animation:fl .5s ease-in-out infinite alternate}
+#flame.out{opacity:0;animation:none;transform:scale(.2)}
+@keyframes fl{to{transform:scale(1.15,.92)}}
+.hint{margin:8px 0 0;color:#6b4a80}
+.btn{border:0;background:var(--pink);color:#fff;font-family:"Fredoka",sans-serif;font-size:1.1rem;padding:12px 24px;border-radius:999px;cursor:pointer;margin-top:12px}
+#mute{position:fixed;top:12px;right:12px;z-index:40;width:46px;height:46px;border-radius:50%;border:0;background:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+#cv{position:fixed;inset:0;pointer-events:none;z-index:60}
+#lb{position:fixed;inset:0;z-index:70;background:rgba(42,18,69,.88);display:none;place-items:center;padding:20px}
+#lb.on{display:grid}#lb img{max-width:100%;max-height:90vh;border:8px solid #fff;border-radius:8px}
+footer{text-align:center;color:#fff;margin-top:70px;text-shadow:0 2px 8px rgba(42,18,69,.5)}
+@media (prefers-reduced-motion:reduce){.gift,#flame,.track,#quiz.shake{animation:none}}
+</style>
+</head>
+<body>
+<div id="wall"></div>
+<canvas id="cv"></canvas>
+<div id="lb"><img alt=""></div>
+
+<div id="gate">
+  <div id="intro">
+    <button class="gift" id="open" aria-label="Buka kejutan">🎁</button>
+    <h2>Ada kejutan buat <span class="nm">Deknay</span></h2>
+    <p>Jawab kuis kecil dulu ya, biar kadonya terbuka. Nyalakan suara juga!</p>
+  </div>
+  <div id="quiz" hidden>
+    <p class="fr" id="qn"></p>
+    <h3 id="qt"></h3>
+    <div id="qo"></div>
+    <p id="qm" aria-live="polite"></p>
+  </div>
+</div>
+
+<button id="mute" aria-label="Matikan musik" hidden>🔊</button>
+<main id="main">
+  <div class="hero" id="hero">
+    <h1>Selamat ulang tahun<span class="nm">Deknay</span>!</h1>
+    <p>Hari ini giliran kamu jadi pusat perhatian. Scroll ya, masih banyak kejutan.</p>
+  </div>
+
+  <section id="s1">
+    <span class="tag t1">Dari MasJay untuk Deknay 💛</span>
+    <div class="card">
+      <p>Deknay, nggak terasa sudah 131 hari sejak kita saling mengenal. Dan hari ini, ada satu hal spesial yang patut dirayakan, yaitu bertambahnya usia kamu. Selamat ulang tahun, ya!</p>
+      <p>Semoga sehat selalu, bahagia setiap waktu, dimudahkan dalam segala urusan, dan dikuatkan dalam setiap keadaan.</p>
+      <p>Semoga apa yang sedang kamu perjuangkan membuahkan hasil, apa yang kamu impikan perlahan menjadi kenyataan, dan apa yang kamu semogakan menemukan jalan untuk diwujudkan.</p>
+      <p>Tetap jadi Deknay yang ceria, terus tumbuh menjadi lebih baik, dan jangan lupa menikmati setiap proses yang kamu lalui. Nggak harus selalu kuat, nggak harus selalu sempurna, yang penting jangan berhenti percaya bahwa hari esok bisa lebih indah.</p>
+      <p>Semoga hal-hal baik selalu menemukan jalannya untuk datang kepadamu.</p>
+      <p>Selamat ulang tahun, Deknay. Semoga panjang umur, sehat selalu, dan bahagia tanpa mengenal kata jemu. 💛</p>
+    </div>
+  </section>
+
+  <div class="strip" id="strip" hidden><div class="track" id="track"></div></div>
+
+  <section id="s2">
+    <span class="tag t2">Momen kita</span>
+    <div class="board" id="board"></div>
+    <p class="hint" style="color:#fff;text-shadow:0 2px 8px rgba(42,18,69,.5)">Ketuk foto untuk memperbesar.</p>
+  </section>
+
+  <section id="s3">
+    <span class="tag t3">Pilih kadonya</span>
+    <div class="gifts" id="gifts"></div>
+  </section>
+
+  <section class="cakebox" id="s4">
+    <span class="tag t4">Tiup lilinnya</span>
+    <div class="card">
+      <button id="cake" aria-label="Tiup lilin">
+        <svg viewBox="0 0 200 190" role="img" aria-label="Kue ulang tahun">
+          <g id="flame"><path d="M100 18c10 14 14 22 8 32-4 6-14 6-16 0-3-9 3-18 8-32z" fill="#ff8a3d"/><path d="M100 32c5 7 7 11 4 16-2 3-7 3-8 0-1-4 1-8 4-16z" fill="#fff3b0"/></g>
+          <rect x="96" y="52" width="8" height="30" rx="3" fill="#7b5cff"/>
+          <rect x="30" y="82" width="140" height="50" rx="14" fill="#ff4f8b"/>
+          <path d="M30 100q12 14 24 0t24 0 24 0 24 0 24 0 20 0v-6a12 12 0 0 0-12-12H42a12 12 0 0 0-12 12z" fill="#fff"/>
+          <rect x="20" y="130" width="160" height="46" rx="14" fill="#ffd23f"/>
+          <circle cx="60" cy="153" r="5" fill="#2ec4b6"/><circle cx="100" cy="153" r="5" fill="#ff4f8b"/><circle cx="140" cy="153" r="5" fill="#7b5cff"/>
+        </svg>
+      </button>
+      <p class="hint" id="cakehint">Ketuk kuenya, make a wish dulu.</p>
+      <button class="btn" id="relight" hidden>Nyalakan lagi</button>
+    </div>
+  </section>
+
+  <footer>Dibuat dengan sayang oleh MasJay</footer>
+</main>
+
+<script>
+// ====== EDIT DI SINI ======
+var NAMA = "Deknay";
+var KADO = ["Traktir makan sepuasnya, nanti ya!","Satu permintaan boleh kamu ajukan ke MasJay.","Doaku: semua yang kamu mau pelan-pelan datang."];
+
+// Folder (semua huruf kecil, sesuai nama di repo)
+var DIR_BG = "foto/background";   // 1.jpg, 2.jpg, ... (salah satu dipilih acak jadi wallpaper)
+var DIR_RANDOM = "foto/random";   // 1.jpg, 2.jpg, ... (bingkai bertebaran dan pita foto)
+var DIR_MOMEN = "foto/momen";     // 1.jpg, 2.jpg, ... (bagian "Momen kita", tampil sesuai urutan nomor)
+var LAGU = "audio/lagu.mp3";
+var MAX_BG = 10, MAX_RANDOM = 60, MAX_MOMEN = 60; // batas atas nomor foto yang dicari. Foto lebih banyak? Naikkan angkanya.
+
+// Kuis pembuka. a = nomor jawaban yang benar, mulai dari 0 (0 = pilihan pertama).
+var KUIS = [
+  {q:"Apa minuman favorit Alisha?", o:["Teh manis","Es jeruk","Kopi Golda","Boba"], a:2},
+  {q:"Apa warna favorit Naaila?", o:["Hitam dan biru tua","Pink dan putih","Hijau dan kuning","Ungu dan oranye"], a:0},
+  {q:"Kalau ditanya lagi apa, biasanya Novyati jawab apa?", o:["Lagi masak","Rebahan","Lagi belajar","Lagi jalan-jalan"], a:1}
+];
+// ==========================
+
+document.querySelectorAll(".nm").forEach(function(e){e.textContent=NAMA});
+function R(a,b){return a+Math.random()*(b-a)}
+function shuffle(a){return a.sort(function(){return Math.random()-.5})}
+
+// ===== Cari foto bernomor di sebuah folder (jpg, jpeg, png, webp); yang tidak ada dilewati =====
+var EXT=["jpg","jpeg","png","webp"];
+function tryExt(dir,i,k){
+  return new Promise(function(res){
+    if(k>=EXT.length)return res(null);
+    var im=new Image();
+    im.onload=function(){res(im.src)};
+    im.onerror=function(){tryExt(dir,i,k+1).then(res)};
+    im.src=dir+"/"+i+"."+EXT[k];
+  });
+}
+function findPhotos(dir,max){
+  var ps=[];for(var i=1;i<=max;i++)ps.push(tryExt(dir,i,0));
+  return Promise.all(ps).then(function(a){return a.filter(Boolean)});
+}
+Promise.all([findPhotos(DIR_BG,MAX_BG),findPhotos(DIR_RANDOM,MAX_RANDOM),findPhotos(DIR_MOMEN,MAX_MOMEN)]).then(function(r){build(r[0],r[1],r[2])});
+
+// Urutan foto untuk bingkai: tiap putaran diacak ulang dan foto yang sama
+// tidak dibiarkan muncul berdekatan, jadi boleh dobel tapi tidak berkelompok.
+function sequence(P,n){
+  var seq=[],gap=Math.min(6,Math.floor(P.length/2));
+  while(seq.length<n){
+    var c=shuffle(P.slice()),t=0;
+    while(t<20&&seq.slice(-gap).indexOf(c[0])>-1){c=shuffle(P.slice());t++}
+    seq=seq.concat(c);
+  }
+  return seq.slice(0,n);
+}
+
+function build(BG,P,M){
+  if(BG.length)document.getElementById("wall").style.backgroundImage='url("'+BG[Math.floor(Math.random()*BG.length)]+'")';
+  if(!P.length)P=M; // kalau foto random kosong, bingkai dan pita pakai foto momen
+  // "Momen kita": semua foto di foto/momen, grid otomatis jadi tetap rapi berapa pun jumlahnya
+  if(M.length){
+    var b=document.getElementById("board");
+    M.forEach(function(s){
+      var d=document.createElement("button");d.className="pol";d.type="button";
+      d.style.transform="rotate("+R(-5,5)+"deg)";
+      d.innerHTML='<img alt="Foto kenangan" loading="lazy" src="'+s+'">';
+      d.onclick=function(){openLb(s)};
+      b.appendChild(d);
+    });
+  }else document.getElementById("s2").hidden=true;
+  if(P.length){
+    var tr=document.getElementById("track"),h="";
+    shuffle(P.slice()).forEach(function(s){h+='<img alt="" src="'+s+'">'});
+    tr.innerHTML=h+h;document.getElementById("strip").hidden=false;
+    scatter(P);
+  }
+}
+
+// Bingkai bertebaran: tinggi halaman dibagi rata jadi beberapa jalur,
+// satu bingkai per jalur, kiri dan kanan bergantian, posisi digoyang sedikit.
+function scatter(P){
+  var m=document.getElementById("main"),H=m.scrollHeight,N=Math.max(24,Math.round(H/120)),S=sequence(P,N);
+  for(var i=0;i<N;i++){
+    var d=document.createElement("div"),w=R(80,125);
+    d.className="fl";d.style.width=w+"px";
+    d.style.top=Math.max(0,(i+.5)*H/N-w/2+R(-22,22))+"px";
+    d.style[i%2?"right":"left"]=R(-16,0)+"%";
+    d.style.transform="rotate("+R(-16,16)+"deg)";
+    d.innerHTML='<img alt="" src="'+S[i]+'">';
+    m.appendChild(d);
+  }
+}
+
+function openLb(src){var lb=document.getElementById("lb");lb.querySelector("img").src=src;lb.classList.add("on")}
+document.getElementById("strip").addEventListener("click",function(e){if(e.target.tagName==="IMG")openLb(e.target.src)});
+document.getElementById("lb").onclick=function(){this.classList.remove("on")};
+
+// ===== Kado =====
+var gf=document.getElementById("gifts");
+KADO.forEach(function(t){
+  var b=document.createElement("button");b.className="g";b.type="button";b.textContent="🎁";
+  b.onclick=function(){if(!b.classList.contains("open")){b.classList.add("open");b.textContent=t;burst(.5,.6,50)}};
+  gf.appendChild(b);
+});
+
+// ===== Konfeti =====
+var cv=document.getElementById("cv"),cx=cv.getContext("2d"),Q=[],raf=0;
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener("resize",size);
+var COL=["#ff4f8b","#ffd23f","#2ec4b6","#7b5cff","#ff8a3d"];
+function burst(x,y,n){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  for(var i=0;i<n;i++){var a=Math.random()*6.283,s=4+Math.random()*7;
+    Q.push({x:x*cv.width,y:y*cv.height,vx:Math.cos(a)*s,vy:Math.sin(a)*s-5,r:5+Math.random()*5,c:COL[i%5],l:90+Math.random()*50})}
+  if(!raf)raf=requestAnimationFrame(tick);
+}
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  Q=Q.filter(function(p){return p.l>0});
+  Q.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.vy+=.22;p.vx*=.99;p.l--;cx.fillStyle=p.c;cx.globalAlpha=Math.min(1,p.l/30);cx.fillRect(p.x,p.y,p.r,p.r*.6)});
+  cx.globalAlpha=1;raf=Q.length?requestAnimationFrame(tick):0;
+}
+
+// ===== Musik: audio/lagu.mp3 (kalau tidak ada, pakai melodi bawaan) =====
+var au=new Audio(LAGU);au.loop=true;
+var on=false,AC,gain,timer;
+var SONG=[[67,.75],[67,.25],[69,1],[67,1],[72,1],[71,2],[67,.75],[67,.25],[69,1],[67,1],[74,1],[72,2],[67,.75],[67,.25],[79,1],[76,1],[72,1],[71,1],[69,1],[77,.75],[77,.25],[76,1],[72,1],[74,1],[72,2]];
+function synth(){
+  if(!on)return;
+  var t=AC.currentTime+.05;
+  SONG.forEach(function(n){
+    var o=AC.createOscillator(),g=AC.createGain();
+    o.type="triangle";o.frequency.value=440*Math.pow(2,(n[0]-69)/12);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.5,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+n[1]*.5);
+    o.connect(g);g.connect(gain);o.start(t);o.stop(t+n[1]*.52);t+=n[1]*.52;
+  });
+  timer=setTimeout(synth,(t-AC.currentTime+1.2)*1000);
+}
+function startMusic(){
+  on=true;
+  au.play().catch(function(){
+    try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();
+      if(!gain){gain=AC.createGain();gain.gain.value=.18;gain.connect(AC.destination)}
+      synth()}catch(e){}
+  });
+}
+function stopMusic(){on=false;au.pause();clearTimeout(timer)}
+var mute=document.getElementById("mute");
+mute.onclick=function(){
+  if(on){stopMusic();mute.textContent="🔇";mute.setAttribute("aria-label","Nyalakan musik")}
+  else{startMusic();mute.textContent="🔊";mute.setAttribute("aria-label","Matikan musik")}
+};
+
+// ===== Gerbang: kado -> kuis -> terbuka + lagu diputar =====
+var qi=0,locked=false;
+var quiz=document.getElementById("quiz"),qo=document.getElementById("qo"),qm=document.getElementById("qm");
+function showQ(){
+  var k=KUIS[qi];locked=false;
+  document.getElementById("qn").textContent="Pertanyaan "+(qi+1)+" dari "+KUIS.length;
+  document.getElementById("qt").textContent=k.q;
+  qo.innerHTML="";
+  k.o.forEach(function(t,j){
+    var b=document.createElement("button");b.type="button";b.className="opt";b.textContent=t;
+    b.onclick=function(){answer(j,b)};qo.appendChild(b);
+  });
+}
+function answer(j,b){
+  if(locked)return;locked=true;
+  if(j===KUIS[qi].a){
+    b.classList.add("ok");qm.textContent="Benar! 🎉";qi++;
+    if(qi>=KUIS.length){startMusic();setTimeout(unlock,600)}
+    else setTimeout(function(){qm.textContent="";showQ()},800);
+  }else{
+    b.classList.add("bad");qm.textContent="Gagal! 😜 Coba lagi ya.";
+    quiz.classList.remove("shake");void quiz.offsetWidth;quiz.classList.add("shake");
+    setTimeout(function(){showQ()},1100);
+  }
+}
+function unlock(){
+  document.getElementById("gate").classList.add("off");
+  mute.hidden=false;
+  burst(.5,.4,100);setTimeout(function(){burst(.2,.5,60);burst(.8,.5,60)},350);
+}
+document.getElementById("open").onclick=function(){
+  if(!KUIS.length){startMusic();unlock();return}
+  document.getElementById("intro").hidden=true;quiz.hidden=false;showQ();
+};
+
+// ===== Lilin =====
+var fl=document.getElementById("flame"),hint=document.getElementById("cakehint"),rl=document.getElementById("relight");
+document.getElementById("cake").onclick=function(){
+  if(fl.classList.contains("out"))return;
+  fl.classList.add("out");hint.textContent="Yeay! Semoga wishmu terkabul. 🎉";rl.hidden=false;burst(.5,.7,120);
+};
+rl.onclick=function(){fl.classList.remove("out");hint.textContent="Ketuk kuenya, make a wish dulu.";rl.hidden=true};
+</script>
+</body>
+</html>
